@@ -53,7 +53,7 @@
             .ssl{
                 margin-top: 100px;
                 position:absolute;
-                margin-left: 435px;
+                margin-left: 400px;
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: bold;
                 font-size: 8vh;
@@ -105,7 +105,7 @@
                 width: 10vw;
                 margin: 0;
                 margin-top: 116px;
-                margin-left: 50px;
+                margin-left: 124px;
                 border-radius: 10px;
                 padding-left: 60px;
                 padding-right: 60px;
@@ -118,14 +118,22 @@
                 height: 10vh;
                 width: 10vw;
                 margin: 0;
-                margin-top: 370px;
-                margin-left: 50px;
+                margin-top: 350px;
+                margin-left: 124px;
                 border-radius: 10px;
                 padding-left: 60px;
                 padding-right: 60px;
                 padding-bottom: 10px;
                 padding-top: 10px;
                 text-align: center;
+            }
+            .graph{
+                display: flex;
+                position: absolute;
+                margin-top: 102px;
+                margin-left: 1050px;
+                border-radius: 10px;
+
             }
         </style>
 
@@ -154,6 +162,7 @@
             
                 <div class="location-flex"><p id="location"></p></div>
                 <div class="person-count"><p>Person count displayed here</p></div>
+                <iframe class="graph" width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2457950/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
             
             
             <script>
