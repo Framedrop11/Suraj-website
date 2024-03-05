@@ -51,7 +51,7 @@
                 font-weight: bold;
             }
             .ssl{
-                margin-top: 200px;
+                margin-top: 100px;
                 position:absolute;
                 margin-left: 435px;
                 font-family: Arial, Helvetica, sans-serif;
@@ -88,6 +88,45 @@
                 box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 
             }
+            #location{
+                position: absolute;
+                color: white;
+                margin-top: 100px;
+            }
+            #video{
+                border-radius: 10px;
+            }
+            
+            .location-flex{
+                display: flex;
+                position: absolute;
+                background-color: rgba(118, 117, 117, 0.766);
+                height: 25vh;
+                width: 10vw;
+                margin: 0;
+                margin-top: 116px;
+                margin-left: 50px;
+                border-radius: 10px;
+                padding-left: 60px;
+                padding-right: 60px;
+                padding-bottom: 40px;
+            }
+            .person-count{
+                display: flex;
+                position: absolute;
+                background-color: rgba(118, 117, 117, 0.766);
+                height: 10vh;
+                width: 10vw;
+                margin: 0;
+                margin-top: 370px;
+                margin-left: 50px;
+                border-radius: 10px;
+                padding-left: 60px;
+                padding-right: 60px;
+                padding-bottom: 10px;
+                padding-top: 10px;
+                text-align: center;
+            }
         </style>
 
     </head>
@@ -111,7 +150,59 @@
             Home
         </p>
         <p class="ssl"> 
-            Surveillance Active now!
+            <video id="video" width="640" height="480" autoplay></video>
+            
+                <div class="location-flex"><p id="location"></p></div>
+                <div class="person-count"><p>Person count displayed here</p></div>
+            
+            
+            <script>
+                const video = document.getElementById('video');
+        
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(stream => {
+                        video.srcObject = stream;
+                    })
+                    .catch(error => {
+                        console.error('Error accessing webcam:', error);
+                    });
+        
+                    function getLocation() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(showPosition, showError);
+                        } else {
+                            alert("Geolocation is not supported by this browser.");
+                        }
+                        }
+        
+                        function showPosition(position) {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+        
+                        const locationElement = document.getElementById("location");
+                        locationElement.innerHTML = `Latitude: ${latitude} 
+                        & Longitude: ${longitude}`;
+        
+                        }
+        
+                        function showError(error) {
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                            alert("User denied the request for Geolocation.");
+                            break;
+                            case error.POSITION_UNAVAILABLE:
+                            alert("Location information is unavailable.");
+                            break;
+                            case error.TIMEOUT:
+                            alert("The request to get user location timed out.");
+                            break;
+                            default:
+                            alert("An unknown error occurred.");
+                        }
+                        }
+        
+                        getLocation();
+            </script>
         </p>
         <p class="wow">
         </p>

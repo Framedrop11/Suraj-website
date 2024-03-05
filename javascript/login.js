@@ -1,5 +1,4 @@
 const loginForm = document.getElementById('loginForm');
-const errorMsg = document.getElementById('errorMsg');
 
 loginForm.addEventListener('submit', (event) => {
   event.preventDefault(); 
