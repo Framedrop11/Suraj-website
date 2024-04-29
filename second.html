@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            Surveillance page
-        </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <style>
-            div{
+<head>
+    <title>
+        Surveillance page
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+        div{
                 width: 1280px;
                 position:fixed;
                 top: 0;
@@ -19,7 +19,9 @@
                 justify-content: center;
                 align-items: center;
                 min-height: 100vh;
+                min-width: 100vw;
                 color: white;
+                position: fixed;
             }
             .text{
                 position: absolute;
@@ -104,28 +106,12 @@
                 height: 25vh;
                 width: 10vw;
                 margin: 0;
-                margin-top: 116px;
-                margin-left: 124px;
+                margin-top: 102px;
+                margin-left: 115px;
                 border-radius: 10px;
                 padding-left: 60px;
                 padding-right: 60px;
                 padding-bottom: 40px;
-            }
-            .person-count{
-                display: flex;
-                position: absolute;
-                background-color: rgba(118, 117, 117, 0.766);
-                height: 10vh;
-                width: 10vw;
-                margin: 0;
-                margin-top: 350px;
-                margin-left: 124px;
-                border-radius: 10px;
-                padding-left: 60px;
-                padding-right: 60px;
-                padding-bottom: 10px;
-                padding-top: 10px;
-                text-align: center;
             }
             .graph{
                 display: flex;
@@ -135,48 +121,60 @@
                 border-radius: 10px;
 
             }
-        </style>
+            .graph2{
+                display: flex;
+                position: absolute;
+                margin-top: 375px;
+                margin-left: 1050px;
+                border-radius: 10px;
+            }
+    </style>
 
-    </head>
-    <body>
-        <div>
-            <img class="image" src="background2.jpg">
-        </div>
-        <p class="text">
-            Workshop Team - 6
-        </p>
-        <p class="snd">
-            Contact
-        </p>
-        <p class="trd" >
-            About Us
-        </p>
-        <p class="fth">
-            Video
-        </p>
-        <p class="fve">
-            Home
-        </p>
-        <p class="ssl"> 
-            <video id="video" width="640" height="480" autoplay></video>
-            
-                <div class="location-flex"><p id="location"></p></div>
-                <div class="person-count"><p>Person count displayed here</p></div>
-                <iframe class="graph" width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2457950/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
-            
-            
-            <script>
-                const video = document.getElementById('video');
-        
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(stream => {
-                        video.srcObject = stream;
-                    })
-                    .catch(error => {
-                        console.error('Error accessing webcam:', error);
-                    });
-        
-                    function getLocation() {
+</head>
+<body>
+<div>
+    <img class="image" src="background2.jpg">
+</div>
+<p class="text">
+    Workshop Team - 6
+</p>
+<p class="snd">
+    Contact
+</p>
+<p class="trd" >
+    About Us
+</p>
+<p class="fth">
+    Video
+</p>
+<p class="fve">
+    Home
+</p>
+<p class="ssl">
+    <!-- <video id="video" width="640" height="480" autoplay></video> -->
+    <img id="stream" src="http://192.168.122.1" width="640" height="480">
+    <div class="location-flex"><p id="location"></p></div>
+    <iframe class="graph" width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2510573/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+    <iframe class="graph2" width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2510573/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+
+
+</p>
+<p class="wow">
+</p>
+
+
+
+<script>
+    // Your existing JavaScript code
+    function updateStream() {
+        const img = document.getElementById('stream');
+        img.src = 'http://192.168.122.1/capture';
+    }
+
+    setInterval(updateStream, 1000); // Update stream every second
+    
+    
+    function getLocation() {
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition(showPosition, showError);
                         } else {
@@ -211,10 +209,7 @@
                         }
         
                         getLocation();
-            </script>
-        </p>
-        <p class="wow">
-        </p>
-        
-    </body>
+</script>
+
+</body>
 </html>
